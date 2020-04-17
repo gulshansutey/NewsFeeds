@@ -22,5 +22,5 @@ interface ApiInterface {
      *
      * */
     @GET
-    fun getFeeds(@Url url: String): Call<FeedResponseModel>
+    fun getFeedsApi(@Url url: String): Call<FeedResponseModel>
 }

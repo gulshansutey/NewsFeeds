@@ -10,13 +10,13 @@ import retrofit2.Response
  * Defined are the network calls that are being used in project.
  * */
 
-fun getFeedsFromUrl(
-    client: RestClient,
+fun callFeedsApi(
+    client: ApiInterface,
     url: String, onSuccess: (response: FeedResponseModel) -> Unit,
     onError: (error: String) -> Unit
 ) {
 
-    client.create().getFeeds(url).enqueue(object :
+    client.getFeedsApi(url).enqueue(object :
         Callback<FeedResponseModel> {
         override fun onFailure(call: Call<FeedResponseModel>, t: Throwable) {
             onError(t.localizedMessage ?: "Unknown error")
