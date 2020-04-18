@@ -21,7 +21,7 @@ import com.gulshansutey.newsfeeds.model.Fact
  * It computes the list data in background thread, and gives more control over the recycler view.
  * */
 
-class FeedRecyclerAdapter : ListAdapter<Fact, RecyclerView.ViewHolder>(ITEM_COMPARATOR) {
+class FactsRecyclerAdapter : ListAdapter<Fact, RecyclerView.ViewHolder>(ITEM_COMPARATOR) {
     companion object {
         private val ITEM_COMPARATOR = object : DiffUtil.ItemCallback<Fact>() {
             override fun areItemsTheSame(oldItem: Fact, newItem: Fact): Boolean =
@@ -42,7 +42,7 @@ class FeedRecyclerAdapter : ListAdapter<Fact, RecyclerView.ViewHolder>(ITEM_COMP
      * @return A new ViewHolder that holds a View of the given view type.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return FeedViewHolder.create(parent)
+        return FactsViewHolder.create(parent)
     }
 
     /**
@@ -56,7 +56,7 @@ class FeedRecyclerAdapter : ListAdapter<Fact, RecyclerView.ViewHolder>(ITEM_COMP
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
-            (holder as FeedViewHolder).bindData(item)
+            (holder as FactsViewHolder).bindData(item)
         }
     }
 
@@ -67,11 +67,11 @@ class FeedRecyclerAdapter : ListAdapter<Fact, RecyclerView.ViewHolder>(ITEM_COMP
      * @param view is the inflated new view hierarchy from the specified xml resource.
      * */
 
-    class FeedViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class FactsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val title: AppCompatTextView = view.findViewById(R.id.tv_feed_title)
-        private val description: AppCompatTextView = view.findViewById(R.id.tv_feed_description)
-        private val image: AppCompatImageView = view.findViewById(R.id.iv_feed_image)
+        private val title: AppCompatTextView = view.findViewById(R.id.tv_fact_title)
+        private val description: AppCompatTextView = view.findViewById(R.id.tv_fact_description)
+        private val image: AppCompatImageView = view.findViewById(R.id.iv_fact_image)
 
         companion object {
 
@@ -81,13 +81,13 @@ class FeedRecyclerAdapter : ListAdapter<Fact, RecyclerView.ViewHolder>(ITEM_COMP
              *        @param <em>attachToRoot</em> is true), or else simply an object that
              *        provides a set of LayoutParams values for root of the returned
              *        hierarchy (if <em>attachToRoot</em> is false.)
-             *@return instance of [FeedViewHolder]
+             *@return instance of [FactsViewHolder]
              */
-            fun create(parent: ViewGroup): FeedViewHolder {
+            fun create(parent: ViewGroup): FactsViewHolder {
                 //resource ID for an XML layout resource to load
                 val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.adapter_feed_item, parent, false)
-                return FeedViewHolder(view)
+                    .inflate(R.layout.adapter_fact_item, parent, false)
+                return FactsViewHolder(view)
             }
         }
 

@@ -9,23 +9,23 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gulshansutey.newsfeeds.R
 import com.gulshansutey.newsfeeds.utils.DialogUtils
-import com.gulshansutey.newsfeeds.view.adapter.FeedRecyclerAdapter
-import com.gulshansutey.newsfeeds.viewmodel.FeedsActivityViewModel
+import com.gulshansutey.newsfeeds.view.adapter.FactsRecyclerAdapter
+import com.gulshansutey.newsfeeds.viewmodel.FactsActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class FeedsActivity : AppCompatActivity() {
+class FactsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val viewModel = ViewModelProvider(this).get(FeedsActivityViewModel::class.java)
-        val feedAdapter = FeedRecyclerAdapter()
+        val viewModel = ViewModelProvider(this).get(FactsActivityViewModel::class.java)
+        val feedAdapter = FactsRecyclerAdapter()
         val layoutManager = LinearLayoutManager(this)
 
-        feeds_recycler_view.layoutManager = layoutManager
-        feeds_recycler_view.adapter = feedAdapter
-        feeds_recycler_view.addItemDecoration(
+        facts_recycler_view.layoutManager = layoutManager
+        facts_recycler_view.adapter = feedAdapter
+        facts_recycler_view.addItemDecoration(
             DividerItemDecoration(
                 this,
                 layoutManager.orientation
@@ -39,7 +39,7 @@ class FeedsActivity : AppCompatActivity() {
         * So instead of check @savedInstanceState here we are checking if @FeedsActivityViewModel contains the data.
         * */
         if (viewModel.response.value == null) {
-            viewModel.getFeeds()
+            viewModel.getFacts()
         }
 
         viewModel.response.observe(this, Observer {
@@ -63,7 +63,7 @@ class FeedsActivity : AppCompatActivity() {
         })
 
         refresh_layout.setOnRefreshListener {
-            viewModel.getFeeds()
+            viewModel.getFacts()
         }
     }
 

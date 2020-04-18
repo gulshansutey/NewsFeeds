@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 /**
- * Each Call from the ApiInterface can make a synchronous or asynchronous HTTP request to the remote webserver.
+ * Each Call from the ApiInterface can make a synchronous or asynchronous HTTP request to the remote web server.
  * The RestClient class generates an implementation of the ApiInterface interface.
  * */
 object RestClient {

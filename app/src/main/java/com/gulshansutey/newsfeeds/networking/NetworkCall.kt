@@ -9,7 +9,7 @@ import retrofit2.Response
 /**
  * Defined are the network calls that are being used in project.
  * */
-fun callFeedsApi(
+fun callFactsApi(
     client: ApiInterface,
     url: String, onSuccess: (response: FactsResponseModel) -> Unit,
     onError: (error: String) -> Unit
