@@ -1,6 +1,6 @@
 package com.gulshansutey.newsfeeds.networking
 
-import com.gulshansutey.newsfeeds.model.FeedResponseModel
+import com.gulshansutey.newsfeeds.model.FactsResponseModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Url
@@ -22,5 +22,5 @@ interface ApiInterface {
      *
      * */
     @GET
-    fun getFeedsApi(@Url url: String): Call<FeedResponseModel>
+    fun getFeedsApi(@Url url: String): Call<FactsResponseModel>
 }

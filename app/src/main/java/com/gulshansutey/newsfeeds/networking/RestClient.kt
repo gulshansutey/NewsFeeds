@@ -2,7 +2,7 @@ package com.gulshansutey.newsfeeds.networking
 
 import com.google.gson.GsonBuilder
 import com.gulshansutey.newsfeeds.BuildConfig
-import com.gulshansutey.newsfeeds.model.FeedResponseModel
+import com.gulshansutey.newsfeeds.model.FactsResponseModel
 import com.gulshansutey.newsfeeds.utils.NetworkConnectionInterceptor
 import com.gulshansutey.newsfeeds.utils.NullObjectRemoverDeserializer
 import okhttp3.OkHttpClient
@@ -40,7 +40,7 @@ object RestClient {
          * A custom deserializer to ignore null objects to being added in the array.
          * */
         val factory = GsonBuilder()
-            .registerTypeAdapter(FeedResponseModel::class.java, NullObjectRemoverDeserializer())
+            .registerTypeAdapter(FactsResponseModel::class.java, NullObjectRemoverDeserializer())
             .create()
         /**
          * The Retrofit class here generates an implementation of the ApiInterface interface.

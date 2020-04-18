@@ -21,8 +21,8 @@ class FeedsActivity : AppCompatActivity() {
 
         val viewModel = ViewModelProvider(this).get(FeedsActivityViewModel::class.java)
         val feedAdapter = FeedRecyclerAdapter()
-
         val layoutManager = LinearLayoutManager(this)
+
         feeds_recycler_view.layoutManager = layoutManager
         feeds_recycler_view.adapter = feedAdapter
         feeds_recycler_view.addItemDecoration(
@@ -43,8 +43,10 @@ class FeedsActivity : AppCompatActivity() {
         }
 
         viewModel.response.observe(this, Observer {
+            tv_message.visibility = View.GONE
             supportActionBar?.title = it.title.toString()
             feedAdapter.submitList(it.rows)
+
         })
 
         viewModel.isInProgress.observe(this, Observer {
@@ -53,7 +55,11 @@ class FeedsActivity : AppCompatActivity() {
         })
 
         viewModel.networkErrors.observe(this, Observer {
+
             DialogUtils.showAlertDialog(this, it)
+            if (viewModel.response.value == null) {
+                tv_message.visibility = View.VISIBLE
+            }
         })
 
         refresh_layout.setOnRefreshListener {

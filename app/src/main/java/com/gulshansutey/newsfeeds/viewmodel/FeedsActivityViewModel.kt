@@ -2,9 +2,10 @@ package com.gulshansutey.newsfeeds.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gulshansutey.newsfeeds.model.FeedResponseModel
+import com.gulshansutey.newsfeeds.model.FactsResponseModel
 import com.gulshansutey.newsfeeds.networking.RestClient
 import com.gulshansutey.newsfeeds.networking.callFeedsApi
+import com.gulshansutey.newsfeeds.utils.SingleLiveEvent
 
 /**
  * The [ViewModel] class is designed to store and manage UI-related data in a lifecycle conscious way,
@@ -12,9 +13,9 @@ import com.gulshansutey.newsfeeds.networking.callFeedsApi
  * */
 class FeedsActivityViewModel : ViewModel() {
 
-    val networkErrors = MutableLiveData<String>()
+    val networkErrors = SingleLiveEvent<String>()
     val isInProgress = MutableLiveData<Boolean>()
-    val response = MutableLiveData<FeedResponseModel>()
+    val response = MutableLiveData<FactsResponseModel>()
     init {
         isInProgress.value = false
     }
@@ -29,6 +30,5 @@ class FeedsActivityViewModel : ViewModel() {
             response.postValue(it)
         })
     }
-
 
 }
