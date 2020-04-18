@@ -6,13 +6,15 @@ import com.gulshansutey.newsfeeds.model.FeedResponseModel
 import com.gulshansutey.newsfeeds.networking.RestClient
 import com.gulshansutey.newsfeeds.networking.callFeedsApi
 
-class FeedViewModel : ViewModel() {
-
+/**
+ * The [ViewModel] class is designed to store and manage UI-related data in a lifecycle conscious way,
+ * and allows data to survive configuration changes such as screen rotations.
+ * */
+class FeedsActivityViewModel : ViewModel() {
 
     val networkErrors = MutableLiveData<String>()
     val isInProgress = MutableLiveData<Boolean>()
     val response = MutableLiveData<FeedResponseModel>()
-
     init {
         isInProgress.value = false
     }

@@ -1,5 +1,6 @@
 package com.gulshansutey.newsfeeds.view.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.gulshansutey.newsfeeds.R
-import com.gulshansutey.newsfeeds.model.FeedModel
+import com.gulshansutey.newsfeeds.model.Fact
 
 
 /**
@@ -19,13 +21,13 @@ import com.gulshansutey.newsfeeds.model.FeedModel
  * It computes the list data in background thread, and gives more control over the recycler view.
  * */
 
-class FeedRecyclerAdapter : ListAdapter<FeedModel, RecyclerView.ViewHolder>(ITEM_COMPARATOR) {
+class FeedRecyclerAdapter : ListAdapter<Fact, RecyclerView.ViewHolder>(ITEM_COMPARATOR) {
     companion object {
-        private val ITEM_COMPARATOR = object : DiffUtil.ItemCallback<FeedModel>() {
-            override fun areItemsTheSame(oldItem: FeedModel, newItem: FeedModel): Boolean =
+        private val ITEM_COMPARATOR = object : DiffUtil.ItemCallback<Fact>() {
+            override fun areItemsTheSame(oldItem: Fact, newItem: Fact): Boolean =
                 oldItem.title == newItem.title
 
-            override fun areContentsTheSame(oldItem: FeedModel, newItem: FeedModel): Boolean =
+            override fun areContentsTheSame(oldItem: Fact, newItem: Fact): Boolean =
                 oldItem == newItem
         }
     }
@@ -69,7 +71,7 @@ class FeedRecyclerAdapter : ListAdapter<FeedModel, RecyclerView.ViewHolder>(ITEM
 
         private val title: AppCompatTextView = view.findViewById(R.id.tv_feed_title)
         private val description: AppCompatTextView = view.findViewById(R.id.tv_feed_description)
-        private val avatar: AppCompatImageView = view.findViewById(R.id.iv_feed_image)
+        private val image: AppCompatImageView = view.findViewById(R.id.iv_feed_image)
 
         companion object {
 
@@ -90,13 +92,22 @@ class FeedRecyclerAdapter : ListAdapter<FeedModel, RecyclerView.ViewHolder>(ITEM
         }
 
         /**
-         * @param feedModel Object item of [FeedModel] type, binding data to views
+         * @param fact Object item of [Fact] type, binding data to views
          * */
 
-        fun bindData(feedModel: FeedModel) {
-            title.text = feedModel.title
-            description.text = feedModel.description
-            Glide.with(itemView.context).load(feedModel.imageUrl).into(avatar)
+        @SuppressLint("CheckResult")
+        fun bindData(fact: Fact) {
+            title.text = fact.title
+            description.text = fact.description
+
+            val requestOptions = RequestOptions()
+            requestOptions.placeholder(R.drawable.ic_launcher_background)
+            requestOptions.error(R.drawable.ic_launcher_background)
+
+            Glide.with(itemView.context)
+                .load(fact.imageUrl)
+                .apply(requestOptions)
+                .into(image)
         }
 
 

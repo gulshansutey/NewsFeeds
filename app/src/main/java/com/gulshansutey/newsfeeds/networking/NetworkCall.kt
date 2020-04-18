@@ -9,7 +9,6 @@ import retrofit2.Response
 /**
  * Defined are the network calls that are being used in project.
  * */
-
 fun callFeedsApi(
     client: ApiInterface,
     url: String, onSuccess: (response: FeedResponseModel) -> Unit,
@@ -19,6 +18,7 @@ fun callFeedsApi(
     client.getFeedsApi(url).enqueue(object :
         Callback<FeedResponseModel> {
         override fun onFailure(call: Call<FeedResponseModel>, t: Throwable) {
+            t.printStackTrace()
             onError(t.localizedMessage ?: "Unknown error")
         }
 
@@ -33,6 +33,5 @@ fun callFeedsApi(
             }
         }
     })
-
 
 }
